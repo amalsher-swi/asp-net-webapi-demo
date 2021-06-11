@@ -10,6 +10,7 @@
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>

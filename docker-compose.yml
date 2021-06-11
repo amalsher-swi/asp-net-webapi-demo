@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  auditlog.api:
+    image: ${DOCKER_REGISTRY-}auditlogapi
+    build:
+      context: .
+      dockerfile: AuditLog.API/Dockerfile
