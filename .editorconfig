@@ -6,6 +6,7 @@ max_line_length=120
 # CA1008: Enums should have zero value
 dotnet_diagnostic.CA1008.severity = suggestion
 dotnet_diagnostic.CA1014.severity=none
+dotnet_diagnostic.CA1031.severity=suggestion
 
 # Microsoft .NET properties
 csharp_new_line_before_members_in_object_initializers=false
