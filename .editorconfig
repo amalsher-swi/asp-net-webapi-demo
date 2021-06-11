@@ -1,0 +1,6 @@
+﻿[*.cs]
+
+insert_final_newline=true
+
+# CA1008: Enums should have zero value
+dotnet_diagnostic.CA1008.severity = suggestion
