@@ -3,6 +3,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AuditLog.API.Controllers
 {
@@ -35,6 +37,14 @@ namespace AuditLog.API.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpGet("test-async")]
+        public async Task<IActionResult> TestAsync(CancellationToken ct)
+        {
+            await Task.Delay(10000, ct);
+
+            return Ok();
         }
     }
 }

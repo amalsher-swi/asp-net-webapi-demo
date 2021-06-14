@@ -3,6 +3,8 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using AuditLog.API.Configuration;
+using AuditLog.API.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +35,8 @@ namespace AuditLog.API
         {
             _services = services;
 
+            services.RegisterOptions(Configuration);
+            
             services
                 .AddControllers()
                 .AddControllersAsServices();
@@ -68,6 +72,8 @@ namespace AuditLog.API
                 c.DocExpansion(DocExpansion.None);
             });
 
+            app.UseCancellationTokenMiddleware();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -78,6 +84,7 @@ namespace AuditLog.API
             {
                 endpoints.MapControllers();
             });
+
 #pragma warning disable CA1062
             WarmUp(app.ApplicationServices);
 #pragma warning restore CA1062
