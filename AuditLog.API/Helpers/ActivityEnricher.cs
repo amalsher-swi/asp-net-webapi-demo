@@ -14,7 +14,7 @@ namespace AuditLog.API.Helpers
         {
             var activity = Activity.Current;
 
-            if (activity is not null && logEvent is not null)
+            if (activity is not null)
             {
                 logEvent.AddPropertyIfAbsent(new LogEventProperty(SpanId, new ScalarValue(activity.GetSpanId())));
                 logEvent.AddPropertyIfAbsent(new LogEventProperty(TraceId, new ScalarValue(activity.GetTraceId())));

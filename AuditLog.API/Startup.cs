@@ -21,11 +21,15 @@ namespace AuditLog.API
     {
         private const string SwaggerPath = "apidocs";
 
+        private readonly string _assemblyName;
+
         private IServiceCollection? _services;
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            _assemblyName = Assembly.GetExecutingAssembly().GetName().Name ?? GetType().Namespace
+                ?? string.Empty;
         }
 
         public IConfiguration Configuration { get; }
@@ -43,8 +47,8 @@ namespace AuditLog.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuditLog API", Version = "v1" });
-                AddSwaggerXml(c);
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = _assemblyName, Version = "v1" });
+                AddSwaggerXml(c, _assemblyName);
             });
 
             services.AddHealthChecks();
@@ -67,7 +71,7 @@ namespace AuditLog.API
             app.UseSwagger(c => c.RouteTemplate = $"{SwaggerPath}/{{documentname}}/swagger.json");
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint($"/{SwaggerPath}/v1/swagger.json", "AuditLog API v1");
+                c.SwaggerEndpoint($"/{SwaggerPath}/v1/swagger.json", $"{_assemblyName} v1");
                 c.RoutePrefix = SwaggerPath;
                 c.DocExpansion(DocExpansion.None);
             });
@@ -90,9 +94,9 @@ namespace AuditLog.API
 #pragma warning restore CA1062
         }
 
-        private static void AddSwaggerXml(SwaggerGenOptions options)
+        private static void AddSwaggerXml(SwaggerGenOptions options, string assemblyName)
         {
-            var xmlFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlFileName = $"{assemblyName}.xml";
             var xmlFile = Directory.GetFiles(AppContext.BaseDirectory, xmlFileName).FirstOrDefault();
             if (xmlFile != null)
             {
