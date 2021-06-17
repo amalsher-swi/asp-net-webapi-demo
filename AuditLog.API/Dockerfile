@@ -7,6 +7,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
+COPY ["AuditLog.Data.MySql/AuditLog.Data.MySql.csproj", "AuditLog.Data.MySql/"]
 COPY ["AuditLog.API/AuditLog.API.csproj", "AuditLog.API/"]
 RUN dotnet restore "AuditLog.API/AuditLog.API.csproj"
 COPY . .

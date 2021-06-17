@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  auditlog.api:
+    image: ${DOCKER_REGISTRY-}auditlogapi
+    build:
+      context: ..
+      dockerfile: AuditLog.API/Dockerfile
+
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=12qw12QW
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

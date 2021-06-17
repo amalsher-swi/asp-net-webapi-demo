@@ -10,7 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{83F64E33-74AD-4320-BB83-6BCE4932637A}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose/docker-compose.dcproj", "{83F64E33-74AD-4320-BB83-6BCE4932637A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{091A97BD-336C-42DF-82CA-17038AF08984}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuditLog.Data.MySql", "AuditLog.Data.MySql\AuditLog.Data.MySql.csproj", "{7933E2BE-148F-43E2-9EAE-ABDBDCD4F453}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,11 +30,18 @@ Global
 		{83F64E33-74AD-4320-BB83-6BCE4932637A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83F64E33-74AD-4320-BB83-6BCE4932637A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83F64E33-74AD-4320-BB83-6BCE4932637A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7933E2BE-148F-43E2-9EAE-ABDBDCD4F453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7933E2BE-148F-43E2-9EAE-ABDBDCD4F453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7933E2BE-148F-43E2-9EAE-ABDBDCD4F453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7933E2BE-148F-43E2-9EAE-ABDBDCD4F453}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7DF21AA-9F95-4405-9FB1-8495A4ADEB4A}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7933E2BE-148F-43E2-9EAE-ABDBDCD4F453} = {091A97BD-336C-42DF-82CA-17038AF08984}
 	EndGlobalSection
 EndGlobal

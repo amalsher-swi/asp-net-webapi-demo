@@ -28,8 +28,7 @@ namespace AuditLog.API
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _assemblyName = Assembly.GetExecutingAssembly().GetName().Name ?? GetType().Namespace
-                ?? string.Empty;
+            _assemblyName = Assembly.GetExecutingAssembly().GetName().Name ?? GetType().Namespace!;
         }
 
         public IConfiguration Configuration { get; }
@@ -40,6 +39,8 @@ namespace AuditLog.API
             _services = services;
 
             services.RegisterOptions(Configuration);
+
+            services.RegisterDependencies(Configuration);
             
             services
                 .AddControllers()
@@ -123,9 +124,11 @@ namespace AuditLog.API
                 .Where(x => x.ServiceType.IsSubclassOf(typeof(ControllerBase)) && !x.ServiceType.IsAbstract)
                 .Select(x => x.ServiceType);
 
+            using var scope = serviceProvider.CreateScope();
+            
             foreach (var controller in controllersList)
             {
-                serviceProvider.GetService(controller);
+                scope.ServiceProvider.GetService(controller);
             }
         }
     }
