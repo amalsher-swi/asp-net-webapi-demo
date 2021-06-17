@@ -16,6 +16,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{091A97BD-3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuditLog.Data.MySql", "AuditLog.Data.MySql\AuditLog.Data.MySql.csproj", "{7933E2BE-148F-43E2-9EAE-ABDBDCD4F453}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DbSchemas", "DbSchemas", "{4727019E-C1A3-461D-A1DE-6E6BDBC86A38}"
+ProjectSection(SolutionItems) = preProject
+	DbSchemas\01_CreateSchema.sql = DbSchemas\01_CreateSchema.sql
+	DbSchemas\Users.sql = DbSchemas\Users.sql
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
