@@ -1,7 +1,7 @@
 namespace AuditLog.Data.MySql.Interfaces
 {
-    public interface IBaseEntity<out TIdType>
+    public interface IBaseEntity<TIdType>
     {
-        TIdType Id { get; }
+        TIdType Id { get; set; }
     }
 }

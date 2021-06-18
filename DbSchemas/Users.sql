@@ -1,17 +1,15 @@
-create table Users
+CREATE TABLE IF NOT EXISTS Users
 (
-	Id int auto_increment,
-	FirstName nvarchar(256) not null,
-	LastName nvarchar(256) null,
-	Email nvarchar(256) not null,
-	Birthday date null,
-	constraint Users_pk
-		primary key (Id)
+	Id INT NOT NULL AUTO_INCREMENT,
+	FirstName NVARCHAR(256) NOT NULL,
+	LastName NVARCHAR(256) NULL,
+	Email NVARCHAR(256) NOT NULL,
+	Birthday DATE NULL,
+	CONSTRAINT Users_pk PRIMARY KEY (Id)
 );
 
-create unique index Users_Email_uindex
-	on Users (Email);
-
+CREATE UNIQUE INDEX Users_Email_uindex
+ON Users (Email);
 
 INSERT INTO AuditLog.Users (FirstName, LastName, Email, Birthday)
 VALUES
