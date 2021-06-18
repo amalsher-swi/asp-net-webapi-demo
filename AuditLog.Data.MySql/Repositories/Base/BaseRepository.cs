@@ -41,6 +41,9 @@ namespace AuditLog.Data.MySql.Repositories.Base
 
         public async Task<TEntity?> InsertAsync(TEntity entity, CancellationToken ct = default)
         {
+            entity.Updated = DateTime.UtcNow;
+            entity.Created = DateTime.UtcNow;
+            
             if (typeof(TIdType) == typeof(int))
             {
                 var intId = await _dbConnection.InsertWithInt32IdentityAsync(entity, token: ct);
@@ -65,6 +68,12 @@ namespace AuditLog.Data.MySql.Repositories.Base
 
         public async Task<bool> InsertAsync(IReadOnlyCollection<TEntity> entities, CancellationToken ct = default)
         {
+            foreach (var entity in entities)
+            {
+                entity.Updated = DateTime.UtcNow;
+                entity.Created = DateTime.UtcNow;
+            }
+
             var result = await Table.BulkCopyAsync(entities, ct);
             // TODO: process the result of operation
             return result.RowsCopied == entities.Count;
@@ -72,6 +81,8 @@ namespace AuditLog.Data.MySql.Repositories.Base
 
         public async Task<bool> UpdateAsync(TEntity entity, CancellationToken ct = default)
         {
+            entity.Updated = DateTime.UtcNow;
+
             var result = await _dbConnection.UpdateAsync(entity, token: ct);
             return result == 1;
         }
