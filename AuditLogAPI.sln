@@ -22,6 +22,8 @@ ProjectSection(SolutionItems) = preProject
 	DbSchemas\Users.sql = DbSchemas\Users.sql
 EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuditLog.Services", "AuditLog.Services\AuditLog.Services.csproj", "{A7355BD8-7C1E-41CD-9EDC-D6D5B2024D3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{7933E2BE-148F-43E2-9EAE-ABDBDCD4F453}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7933E2BE-148F-43E2-9EAE-ABDBDCD4F453}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7933E2BE-148F-43E2-9EAE-ABDBDCD4F453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7355BD8-7C1E-41CD-9EDC-D6D5B2024D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7355BD8-7C1E-41CD-9EDC-D6D5B2024D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7355BD8-7C1E-41CD-9EDC-D6D5B2024D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7355BD8-7C1E-41CD-9EDC-D6D5B2024D3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

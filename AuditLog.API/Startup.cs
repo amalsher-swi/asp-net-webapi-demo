@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Reflection;
 using AuditLog.API.Configuration;
 using AuditLog.API.Middleware;
+using AuditLog.Services.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -40,8 +41,12 @@ namespace AuditLog.API
 
             services.RegisterOptions(Configuration);
 
+            services.AddAutoMapper(
+                c => c.AddProfile<MappingConfiguration>(),
+                typeof(Startup));
+
             services.RegisterDependencies(Configuration);
-            
+
             services
                 .AddControllers()
                 .AddControllersAsServices();
