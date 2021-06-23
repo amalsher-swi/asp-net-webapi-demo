@@ -9,6 +9,7 @@ namespace AuditLog.Services.Mapping
         public MappingConfiguration()
         {
             CreateMap<UserEntity, User>().ReverseMap();
+            CreateMap<AuditLogEntity, AuditLogModel>().ReverseMap();
         }
     }
 }

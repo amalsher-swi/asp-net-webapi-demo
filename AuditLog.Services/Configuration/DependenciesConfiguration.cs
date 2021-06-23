@@ -13,6 +13,7 @@ namespace AuditLog.Services.Configuration
             services.RegisterRepositories();
 
             services.AddTransient<IUsersProvider, UsersProvider>();
+            services.AddTransient<IAuditLogsProvider, AuditLogsProvider>();
             
             return services;
         }

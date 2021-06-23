@@ -12,5 +12,6 @@ namespace AuditLog.Data.MySql.DbContext
         }
 
         public ITable<UserEntity> Users => GetTable<UserEntity>();
+        public ITable<AuditLogEntity> AuditLogs => GetTable<AuditLogEntity>();
     }
 }

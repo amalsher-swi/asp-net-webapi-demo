@@ -20,9 +20,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DbSchemas", "DbSchemas", "{
 ProjectSection(SolutionItems) = preProject
 	DbSchemas\01_CreateSchema.sql = DbSchemas\01_CreateSchema.sql
 	DbSchemas\Users.sql = DbSchemas\Users.sql
+	DbSchemas\AuditLogs.sql = DbSchemas\AuditLogs.sql
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuditLog.Services", "AuditLog.Services\AuditLog.Services.csproj", "{A7355BD8-7C1E-41CD-9EDC-D6D5B2024D3D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{A0FECB2F-8B1C-4891-9BD6-1EDA9AB38BBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuditLog.Common", "AuditLog.Common\AuditLog.Common.csproj", "{8C09FEC0-5160-48D9-88DE-EFF90F47CD2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +51,10 @@ Global
 		{A7355BD8-7C1E-41CD-9EDC-D6D5B2024D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7355BD8-7C1E-41CD-9EDC-D6D5B2024D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7355BD8-7C1E-41CD-9EDC-D6D5B2024D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C09FEC0-5160-48D9-88DE-EFF90F47CD2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C09FEC0-5160-48D9-88DE-EFF90F47CD2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C09FEC0-5160-48D9-88DE-EFF90F47CD2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C09FEC0-5160-48D9-88DE-EFF90F47CD2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,5 +64,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7933E2BE-148F-43E2-9EAE-ABDBDCD4F453} = {091A97BD-336C-42DF-82CA-17038AF08984}
+		{8C09FEC0-5160-48D9-88DE-EFF90F47CD2E} = {A0FECB2F-8B1C-4891-9BD6-1EDA9AB38BBC}
 	EndGlobalSection
 EndGlobal

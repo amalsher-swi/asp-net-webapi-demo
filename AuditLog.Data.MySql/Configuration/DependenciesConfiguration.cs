@@ -27,6 +27,7 @@ namespace AuditLog.Data.MySql.Configuration
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IAuditLogsRepository, AuditLogsRepository>();
             
             return services;
         }
