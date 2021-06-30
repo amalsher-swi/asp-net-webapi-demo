@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using AuditLog.Common.Models;
 using AuditLog.Services.Interfaces.Providers;
 using AuditLog.Services.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -18,10 +19,29 @@ namespace AuditLog.API.Controllers
             _auditLogsProvider = auditLogsProvider;
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public Task<IEnumerable<AuditLogModel>> Get(CancellationToken ct)
         {
             return _auditLogsProvider.GetAllAsync(ct);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<PagedDataResult<AuditLogModel>>> GetPaged(
+            string? filterBy,
+            string? filterValue,
+            string? sortBy,
+            bool sortAsc = true,
+            int page = 0,
+            int pageSize = 0,
+            CancellationToken ct = default)
+        {
+            if (!string.IsNullOrWhiteSpace(filterBy) && string.IsNullOrWhiteSpace(filterValue))
+            {
+                return BadRequest($"{nameof(filterValue)} must be specified when {nameof(filterBy)} is not empty");
+            }
+
+            return Ok(
+                await _auditLogsProvider.FilterByAsync(filterBy, filterValue, sortBy, sortAsc, page, pageSize, ct));
         }
 
         [HttpGet("{id:int}")]

@@ -19,4 +19,6 @@ CREATE TABLE IF NOT EXISTS AuditLogs
 
 INSERT INTO AuditLogs (Timestamp, UserId, PartnerId, PartnerName, Action, Entity, Status, ErrorCode, ErrorMessage, TraceId, Created, Updated)
 VALUES
-       ('2021-06-23 00:00:00', 1, 1, 'IASO', 'Post', 'Partner', 1, null, null, 'some_trace_id', '2021-06-17', '2021-06-17');
+('2021-06-23 00:00:00', 1, 1, 'IASO', 'Post', 'Partner', 1, null, null, 'some_trace_id', '2021-06-17', '2021-06-17'),
+('2021-06-23 00:00:00', 2, 2, 'MASO', 'Update', 'Partner', 0, null, null, 'some_trace_id', '2021-06-17', '2021-06-17'),
+('2021-06-23 00:00:00', 1, 3, 'KASO', 'Delete', 'Partner', 2, null, null, 'some_trace_id', '2021-06-17', '2021-06-17');

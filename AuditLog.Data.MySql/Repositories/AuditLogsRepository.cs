@@ -5,7 +5,7 @@ using AuditLog.Data.MySql.Repositories.Base;
 
 namespace AuditLog.Data.MySql.Repositories
 {
-    public class AuditLogsRepository : BaseRepository<AuditLogEntity, int>, IAuditLogsRepository
+    public class AuditLogsRepository : BasePagedRepository<AuditLogEntity, int>, IAuditLogsRepository
     {
         public AuditLogsRepository(AppDataConnection dbConnection) : base(dbConnection)
         {
