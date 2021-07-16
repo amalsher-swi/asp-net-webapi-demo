@@ -14,7 +14,7 @@ namespace AuditLog.Services.Providers
     {
         private readonly IMapper _mapper;
         private readonly IUsersRepository _usersRepository;
-        
+
         public UsersProvider(IMapper mapper, IUsersRepository usersRepository) : base(mapper, usersRepository)
         {
             _mapper = mapper;
