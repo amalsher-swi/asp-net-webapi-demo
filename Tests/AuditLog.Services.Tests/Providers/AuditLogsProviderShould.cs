@@ -49,7 +49,7 @@ namespace AuditLog.Services.Tests.Providers
         {
             const string filterBy = nameof(AuditLogEntity.PartnerName);
             const string filterValue = "test";
-            
+
             var auditLogsRepositoryMock = new Mock<IAuditLogsRepository>();
 
             var sut = new AuditLogsProvider(Mapper, auditLogsRepositoryMock.Object);
@@ -66,6 +66,32 @@ namespace AuditLog.Services.Tests.Providers
                     It.Is<Expression<Func<AuditLogEntity, bool>>>(exp => exp.ToString() == filterExp.ToString()),
                     It.IsAny<Expression<Func<AuditLogEntity, object>>>(),
                     It.IsAny<bool>(),
+                    It.IsAny<int>(),
+                    It.IsAny<int>(),
+                    It.IsAny<CancellationToken>()),
+                Times.Once);
+        }
+
+        [Fact]
+        public async Task SendSortingExpressionWhenOrderByIsNotNullWithCorrectOrdering()
+        {
+            const string sortBy = nameof(AuditLogEntity.PartnerName);
+
+            var auditLogsRepositoryMock = new Mock<IAuditLogsRepository>();
+
+            var sut = new AuditLogsProvider(Mapper, auditLogsRepositoryMock.Object);
+
+            await sut.FilterByAsync(It.IsAny<string>(), It.IsAny<string>(),
+                sortBy, true,
+                It.IsAny<int>(), It.IsAny<int>(), CancellationToken.None);
+
+            var sortExp = ExpressionHelpers.PropertyToLambda<AuditLogEntity>(sortBy);
+
+            auditLogsRepositoryMock.Verify(
+                x => x.GetPagedAsync(
+                    It.IsAny<Expression<Func<AuditLogEntity, bool>>>(),
+                    It.Is<Expression<Func<AuditLogEntity, object>>>(exp => exp.ToString() == sortExp.ToString()),
+                    true,
                     It.IsAny<int>(),
                     It.IsAny<int>(),
                     It.IsAny<CancellationToken>()),
