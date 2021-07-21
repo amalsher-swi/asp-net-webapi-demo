@@ -1,11 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using AuditLog.API.Configuration;
 using AuditLog.API.Middleware;
+using AuditLog.API.Models;
 using AuditLog.Services.Mapping;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -47,6 +50,8 @@ namespace AuditLog.API
 
             services.RegisterDependencies(Configuration);
 
+            ConfigureAuthentication(services);
+
             services
                 .AddControllers()
                 .AddControllersAsServices();
@@ -55,6 +60,7 @@ namespace AuditLog.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = _assemblyName, Version = "v1" });
                 AddSwaggerXml(c, _assemblyName);
+                AddSecurityRequirements(c);
             });
 
             services.AddHealthChecks();
@@ -64,7 +70,7 @@ namespace AuditLog.API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             ConfigureHealthCheckPipeline(app);
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -88,7 +94,7 @@ namespace AuditLog.API
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
@@ -123,6 +129,55 @@ namespace AuditLog.API
             );
         }
 
+        private void ConfigureAuthentication(IServiceCollection services)
+        {
+            var authOptions = Configuration.GetSection(nameof(AuthOptions)).Get<AuthOptions>();
+
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = $"{authOptions.Url}/Identity";
+                    options.Audience = authOptions.Scopes;
+                });
+        }
+
+        private void AddSecurityRequirements(SwaggerGenOptions options)
+        {
+            var authOptions = Configuration.GetSection(nameof(AuthOptions)).Get<AuthOptions>();
+
+            options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+            {
+                Type = SecuritySchemeType.OAuth2,
+                Flows = new OpenApiOAuthFlows
+                {
+                    AuthorizationCode = new OpenApiOAuthFlow
+                    {
+                        AuthorizationUrl = new Uri($"{authOptions.Url}/connect/authorize"),
+                        TokenUrl = new Uri($"{authOptions.Url}/connect/token"),
+                        Scopes = new Dictionary<string, string>
+                        {
+                            { authOptions.Scopes, "Audit access" }
+                        }
+                    }
+                }
+            });
+
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme, Id = "oauth2"
+                        }
+                    },
+                    new[] { authOptions.Scopes }
+                }
+            });
+        }
+
         private void WarmUp(IServiceProvider serviceProvider)
         {
             var controllersList = (_services ?? throw new InvalidOperationException($"Field {nameof(_services)} must be initialized"))
@@ -130,7 +185,7 @@ namespace AuditLog.API
                 .Select(x => x.ServiceType);
 
             using var scope = serviceProvider.CreateScope();
-            
+
             foreach (var controller in controllersList)
             {
                 scope.ServiceProvider.GetService(controller);
