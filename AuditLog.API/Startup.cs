@@ -95,6 +95,7 @@ namespace AuditLog.API
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -137,7 +138,7 @@ namespace AuditLog.API
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
-                    options.Authority = $"{authOptions.Url}/Identity";
+                    options.Authority = authOptions.Url;
                     options.Audience = authOptions.Scopes;
                 });
         }
@@ -151,7 +152,7 @@ namespace AuditLog.API
                 Type = SecuritySchemeType.OAuth2,
                 Flows = new OpenApiOAuthFlows
                 {
-                    AuthorizationCode = new OpenApiOAuthFlow
+                    ClientCredentials = new OpenApiOAuthFlow
                     {
                         AuthorizationUrl = new Uri($"{authOptions.Url}/connect/authorize"),
                         TokenUrl = new Uri($"{authOptions.Url}/connect/token"),
