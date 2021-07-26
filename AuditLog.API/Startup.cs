@@ -75,10 +75,10 @@ namespace AuditLog.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
+            // else
+            // {
+            //     app.UseHsts();
+            // }
 
             app.UseSwagger(c => c.RouteTemplate = $"{SwaggerPath}/{{documentname}}/swagger.json");
             app.UseSwaggerUI(c =>
@@ -90,7 +90,7 @@ namespace AuditLog.API
 
             app.UseCancellationTokenMiddleware();
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 

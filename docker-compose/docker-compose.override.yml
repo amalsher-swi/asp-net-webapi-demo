@@ -4,12 +4,13 @@ services:
   auditlog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80;http://+:8000
+      - ASPNETCORE_URLS=http://+:80;http://+:8000
+#      - ASPNETCORE_URLS=https://+:443;http://+:80;http://+:8000
       - ASPNETCORE_MANAGEMENTPORT=8000
       - ConnectionStrings__Default=server=localhost;user=root;password=12qw12QW;database=AuditLog
     ports:
       - "7000:80"
-      - "7001:443"
+#      - "7001:443"
       - "8000:8000"
     volumes:
 #      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
