@@ -4,10 +4,12 @@ using System.Threading.Tasks;
 using AuditLog.Common.Models;
 using AuditLog.Services.Interfaces.Providers;
 using AuditLog.Services.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuditLog.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class AuditLogsController : ControllerBase
