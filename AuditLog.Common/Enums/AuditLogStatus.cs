@@ -1,6 +1,6 @@
 namespace AuditLog.Common.Enums
 {
-    public enum StatusEnum
+    public enum AuditLogStatus
     {
         Success = 0,
         Error = 1,

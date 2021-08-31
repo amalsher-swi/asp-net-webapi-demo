@@ -120,13 +120,10 @@ namespace AuditLog.API
         private void ConfigureHealthCheckPipeline(IApplicationBuilder app)
         {
             app.MapWhen(
-                ctx => ctx.Request.Method == HttpMethod.Get.Method &&
-                       ctx.Request.Path.StartsWithSegments("/health", StringComparison.Ordinal),
+                ctx => ctx.Request.Method == HttpMethod.Get.Method
+                       && ctx.Request.Path.StartsWithSegments("/health", StringComparison.Ordinal),
                 builder =>
-                    builder
-                        .UseRouting()
-                        .UseEndpoints(endpoints =>
-                            endpoints.MapHealthChecks("/health").RequireHost($"*:{Configuration["ManagementPort"]}"))
+                    builder.UseHealthChecks("/health", Configuration["ManagementPort"])
             );
         }
 

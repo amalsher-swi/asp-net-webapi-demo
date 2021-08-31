@@ -14,7 +14,7 @@ namespace AuditLog.Data.MySql.Entities
         public string PartnerName { get; set; } = string.Empty;
         public string? Action { get; set; }
         public string? Entity { get; set; }
-        public StatusEnum? Status { get; set; }
+        public AuditLogStatus? Status { get; set; }
         public int? ErrorCode { get; set; }
         public string? ErrorMessage { get; set; }
         public string? TraceId { get; set; }
